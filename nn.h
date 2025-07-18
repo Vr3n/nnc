@@ -89,12 +89,12 @@ Mat mat_row(Mat m, size_t row)
         .cols = m.cols,
         .stride = m.stride,
         .es = &MAT_AT(m, row, 0),
-    }
+    };
 }
 void mat_copy(Mat dest, Mat a)
 {
-    NN_ASSER(dest.rows == a.rows);
-    NN_ASSER(dest.cols == a.cols);
+    NN_ASSERT(dest.rows == a.rows);
+    NN_ASSERT(dest.cols == a.cols);
 
     for (size_t i = 0; i < dest.rows; ++i) {
         for (size_t j = 0; j < dest.cols; ++j) {

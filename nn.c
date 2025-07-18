@@ -3,10 +3,10 @@
 
 
 typedef struct {
-    Mat x;
+    Mat x, a1, a2;
 
-    Mat w1, b1, a1;
-    Mat w2, b2, a2;
+    Mat w1, b1
+    Mat w2, b2;
 
 } Xor;
 
@@ -51,7 +51,7 @@ float cost (Xor m, Mat ti, Mat to)
     return results / n;
 }
 
-float t1[] = {
+float td[] = {
     0, 0, 0,
     0, 1, 1,
     1, 0, 1,
@@ -62,6 +62,26 @@ float t1[] = {
 int main (void)
 {
     srand(42);
+
+    size_t stride = 3;
+    size_t n = sizeof(td) / sizeof(td[0]) / stride;
+    Mat ti = {
+        .rows = n,
+        .cols = 2,
+        .stride = stride,
+        .es = td
+    };
+
+    Mat to = {
+        .rows = n,
+        .cols = 1,
+        .stride = stride,
+        .es = &td[2] // same as td + 2
+    };
+
+    MAT_PRINT(ti);
+    MAT_PRINT(to);
+
     Xor xr;
 
     xr.x = mat_alloc(1, 2);
